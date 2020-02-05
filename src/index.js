@@ -8,52 +8,27 @@ import * as serviceWorker from './serviceWorker';
 
 
 const App = props => {
-    const user = {
-        name: 'Harry Potter',
-        address: 'Hogwarts',
-        broom: 'Firebolt'
-    }
-    return <User person={user} items='Robe, cauldron, wand' amount={100} />
+    
+    return <List items={listItems} />
 }
 
-const User = props => (
-    <ul>
-        <li>Name: {props.person.name}</li>
-        <ul>
-            <li>Address: {props.person.address}</li>
-            <li>Broom: {props.person.broom}</li>
-        </ul>
-        <li>Items: {props.items}</li>
-        <li>Paid: {String(props.paid)}</li>
-        <li>Amount: {props.amount}</li>
-        <li>Shipped: {String(props.shipped)}</li>
-    </ul>
-);
+// for loop to push items to new array
+const items = ['bread', 'milk', 'eggs', 'chocolate'];
 
-User.propTypes = {
-    person: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        address: PropTypes.string.isRequired,
-        broom: PropTypes.string.isRequired
-    }),
-    items: PropTypes.string.isRequired,
-    paid: PropTypes.bool,
-    amount: PropTypes.number.isRequired,
-    shipped: PropTypes.bool
+const listItems = [];
+
+for(let i = 0; i < items.length; i++) {
+    
+    listItems.unshift(<li key={i}>{items[i]}</li>); // using unshift to add them in backwards so I can see on the html page that is its the listItems array
+    // each item needs a key to indicate the number and array location, The key attribute is used by React to identify which items have been changed or removed, as well as when they're added.
 }
 
-User.defaultProps = {
-    paid: false,
-    shipped: false
-}
-
-
+const List = props => <ul>{props.items}</ul>;
 
 
 ReactDOM.render(
     <App />,
     document.getElementById('root')
 );
-
 
 serviceWorker.unregister();

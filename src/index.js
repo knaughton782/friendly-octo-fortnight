@@ -7,27 +7,48 @@ import * as serviceWorker from './serviceWorker';
 
 
 
-const App = props => (
-       <Employee name="james" age={27} position="coder" />
-    )
+const App = props => {
+    const user = {
+        name: 'Harry Potter',
+        address: 'Hogwarts',
+        broom: 'Firebolt'
+    }
+    return <User person={user} items='Robe, cauldron, wand' amount={100} />
+}
 
-
-const Employee = props => (
-    <ul style={{margin: 45, fontSize: 26}}>
-    <li>{props.name}</li>
-    <li>{props.age}</li>
-    <li>{props.position}</li>
+const User = props => (
+    <ul>
+        <li>Name: {props.person.name}</li>
+        <ul>
+            <li>Address: {props.person.address}</li>
+            <li>Broom: {props.person.broom}</li>
+        </ul>
+        <li>Items: {props.items}</li>
+        <li>Paid: {String(props.paid)}</li>
+        <li>Amount: {props.amount}</li>
+        <li>Shipped: {String(props.shipped)}</li>
     </ul>
-)
+);
 
-Employee.propTypes = {
-    name: PropTypes.string.isRequired,
-    age: PropTypes.number.isRequired,
-    positon: PropTypes.string
+User.propTypes = {
+    person: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        address: PropTypes.string.isRequired,
+        broom: PropTypes.string.isRequired
+    }),
+    items: PropTypes.string.isRequired,
+    paid: PropTypes.bool,
+    amount: PropTypes.number.isRequired,
+    shipped: PropTypes.bool
 }
-Employee.defaultProps = {
-    position: 'employee'
+
+User.defaultProps = {
+    paid: false,
+    shipped: false
 }
+
+
+
 
 ReactDOM.render(
     <App />,

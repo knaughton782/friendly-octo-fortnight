@@ -8,14 +8,19 @@ import * as serviceWorker from './serviceWorker';
 //use the map function to render data from the array
 
 const App = props => {
-    // for loop to push items to new array
-    const items = ['bread', 'milk', 'eggs', 'chocolate', 'chocolate', 'chocolate'];
+    const items = [
+        { item: 'bread', price: 3.56},
+        { item: 'eggs', price: 3.15 },
+        { item: 'chocolate', price: 2},
+        { item: 'chocolate', price: 2.35 },
+        { item: 'chocolate', price: 5} 
+    ];
     
     return <List items={items} />
 }
 
 const List = props => {
-    const listItems = props.items.map((item, index) => <li key={index}>{item}</li>);
+    const listItems = props.items.map((item, index) => <li key={index}>{item.item}: ${(item.price).toFixed(2)}</li>);
     return <ul>{listItems}</ul>
 }
 

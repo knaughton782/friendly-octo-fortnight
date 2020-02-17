@@ -3,24 +3,23 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import './index.css';
 // import App from './App';
+
 import * as serviceWorker from './serviceWorker';
 
-//use the map function to render data from the array
-
 const App = props => {
-    const items = [
-        { item: 'bread', price: 3.56},
-        { item: 'eggs', price: 3.15 },
-        { item: 'chocolate', price: 2},
-        { item: 'chocolate', price: 2.35 },
-        { item: 'chocolate', price: 5} 
+    const cars = [
+        'Tacoma',
+        'Suburban',
+        'Jeep',
+        'Ford Explorer'
     ];
-    
-    return <List items={items} />
+    return <List cars={cars}/>
 }
 
 const List = props => {
-    const listItems = props.items.map((item, index) => <li key={index}>{item.item}: ${(item.price).toFixed(2)}</li>);
+    const listItems = props.cars.map((item, index) => (
+        <li key={index}>{item}</li>
+    ));
     return <ul>{listItems}</ul>
 }
 

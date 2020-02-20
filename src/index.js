@@ -5,36 +5,41 @@ import './index.css';
 // import * as serviceWorker from './serviceWorker';
 // import App from './App';
 
-class Text extends React.Component {
-    constructor() {
-        //won't use props in this component because state is managing everything
-        super(); //creates an instance of the base class called component
-        //super is required before you can set the state of a component
+
+class BankAcct extends React.Component {
+    constructor(props) {
+        super(props);
         this.state = {
-            text: 'don\'t like Steve whatshisname'
-            //this is the default state
+            acctBal: 3456.89,
+            addAmt: 0
         }
     }
-    update(event) {
-        this.setState({
-            text: event.target.value
-        })
+    increment() {
+        this.setState({ acctBal: this.state.acctBal + this.state.addAmt})
+    }
+
+    decrement() {
+
     }
 
     render() {
-        //jsx to render to the dom
         return (
-            <div>
-                <input style={{ margin: 100 + 'px' }} type="text" onChange={this.update.bind(this)} />
-                <h1 style={{ margin: 100 + 'px' }}>{this.state.text}</h1>
+            <div style={{margin: 100 +'px'}}>
+            <h3>Account Balance: ${this.state.acctBal}</h3>
+            <input type="number"
+                onChange={event => this.setState({addAmt: parseInt(event.target.value)})}
+                value={this.state.addAmt}/>
+
+            <button onClick={this.increment.bind(this)} className="btn">Increase Balance</button>
             </div>
-            //bind is required so it stays into this local scope
         )
     }
 }
 
 
-ReactDOM.render(<Text />, document.getElementById('root'));
+
+
+ReactDOM.render(<BankAcct />, document.getElementById('root'));
 
 
 //serviceWorker.unregister();

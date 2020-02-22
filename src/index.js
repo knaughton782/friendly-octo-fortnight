@@ -1,45 +1,74 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import './index.css';
-// import * as serviceWorker from './serviceWorker';
 // import App from './App';
 
-
-class BankAcct extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            acctBal: 3456.89,
-            addAmt: 0
-        }
-    }
-    increment() {
-        this.setState({ acctBal: this.state.acctBal + this.state.addAmt})
-    }
-
-    decrement() {
-
-    }
-
-    render() {
-        return (
-            <div style={{margin: 100 +'px'}}>
-            <h3>Account Balance: ${this.state.acctBal}</h3>
-            <input type="number"
-                onChange={event => this.setState({addAmt: parseInt(event.target.value)})}
-                value={this.state.addAmt}/>
-
-            <button onClick={this.increment.bind(this)} className="btn">Increase Balance</button>
-            </div>
-        )
-    }
+const App = (props) => {
+    return <NumberEnrolled />;
 }
 
 
+class NumberEnrolled extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            waitlist: 7485895,
+            enrolled: 2039845,
+            addToWaitlist: 0,
+            addToEnrolled: 0
+        };
+    }
+
+    incrementWaitlistByOne() {
+        this.setState({
+            waitlist: this.state.waitlist + 1
+        });
+    }
+
+    incrementEnrolledByOne() {
+        this.setState({
+            enrolled: this.state.enrolled + 1
+        })
+    }
+    incrementWaitlistByLots() {
+        this.setState({
+            waitlist: this.state.waitlist + parseInt(this.state.addToWaitlist)
+        });
+
+        // incrementWaitlistByLots() {
+        //     this.setState({
+        //         waitlist: this.state.waitlist + parseInt(this.state.addToWaitlist)
+        //     });
+        }
+
+        render() {
+            return (
+                <div>
+                    <h3>Waitlisted Students: {this.state.waitlist}</h3>
+                    <button onClick={this.incrementWaitlistByOne.bind(this)}>Add 1 to Waitlist</button>
+
+                    <input type="number"
+                        onChange={event => this.setState({ addToWaitlist: event.target.value })}
+                        value={this.state.addToWaitlist}
+                    />
+                    <button onClick={this.incrementWaitlistByLots.bind(this)}>Add Multiple to Waitlist</button>
 
 
-ReactDOM.render(<BankAcct />, document.getElementById('root'));
+                    <h3>Enrolled Students: {this.state.enrolled}</h3>
+                    <button onClick={this.incrementEnrolledByOne.bind(this)}>Add 1 to Enrolled</button>
+
+
+
+                </div>
+            );
+        }
+    }
+
+
+
+    ReactDOM.render(<App />, document.getElementById('root'));
 
 
 //serviceWorker.unregister();

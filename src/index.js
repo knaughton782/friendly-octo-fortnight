@@ -4,67 +4,79 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 
-const App = (props) => {
-    return <NumberEnrolled />;
+const App = props => {
+    return <NumberOfStudents />;
 }
 
-
-class NumberEnrolled extends React.Component {
-    constructor(props) {
+class NumberOfStudents extends React.Component {
+    constructor(props){
         super(props);
 
         this.state = {
-            waitlist: 7485895,
-            enrolled: 2039845,
+            enrolled: 567,
+            waitlisted: 23,
             addToWaitlist: 0,
             addToEnrolled: 0
-        };
-    }
-
-    incrementWaitlistByOne() {
-        this.setState({
-            waitlist: this.state.waitlist + 1
-        });
+        }
     }
 
     incrementEnrolledByOne() {
-        this.setState({
-            enrolled: this.state.enrolled + 1
-        })
+        this.setState({ enrolled: this.state.enrolled + 1 });
     }
-    incrementWaitlistByLots() {
-        this.setState({
-            waitlist: this.state.waitlist + parseInt(this.state.addToWaitlist)
-        });
+    decrementEnrolledByOne() {
+        this.setState({ enrolled: this.state.enrolled - 1 });
+    }
+    incrementWaitlistedByOne() {
+        this.setState({ waitlisted: this.state.waitlisted + 1 });
+    }
+    decrementWaitlistedByOne() {
+        this.setState({ waitlisted: this.state.waitlisted + 1 });
+    }
+    incrementEnrolled() {
+        this.setState({ enrolled: this.state.enrolled + parseInt(this.state.addToEnrolled)});
+    }
+    incrementWaitlisted() {
+        this.setState({ waitlisted: this.state.waitlisted + parseInt(this.state.addToWaitlist) });
+    }
 
-        // incrementWaitlistByLots() {
-        //     this.setState({
-        //         waitlist: this.state.waitlist + parseInt(this.state.addToWaitlist)
-        //     });
-        }
+    render() {
+        return (
+            <div className='divPadding'>
+                <h1>Enrolled Students: {this.state.enrolled}</h1>
+                <button className='btn' onClick={this.incrementEnrolledByOne.bind(this)}>Increment Enrolled By One</button>
 
-        render() {
-            return (
-                <div>
-                    <h3>Waitlisted Students: {this.state.waitlist}</h3>
-                    <button onClick={this.incrementWaitlistByOne.bind(this)}>Add 1 to Waitlist</button>
+                <button className='btn' onClick={this.decrementEnrolledByOne.bind(this)}>Decrement Enrolled By One</button>
 
-                    <input type="number"
-                        onChange={event => this.setState({ addToWaitlist: event.target.value })}
-                        value={this.state.addToWaitlist}
+                <input 
+                    type="number" 
+                    onChange={event => this.setState({ addToEnrolled: event.target.value})}
+                    value={this.state.addToEnrolled}
                     />
-                    <button onClick={this.incrementWaitlistByLots.bind(this)}>Add Multiple to Waitlist</button>
-
-
-                    <h3>Enrolled Students: {this.state.enrolled}</h3>
-                    <button onClick={this.incrementEnrolledByOne.bind(this)}>Add 1 to Enrolled</button>
+                <button className='btn' onClick={this.incrementEnrolled.bind(this)}>Add Amount to Enrolled</button>
 
 
 
-                </div>
-            );
-        }
+
+                <h1>Waitlisted Students: {this.state.waitlisted}</h1>
+                <button className='btn' onClick={this.incrementWaitlistedByOne.bind(this)}>Increment Waitlisted By One</button>
+
+                <button className='btn' onClick={this.decrementWaitlistedByOne.bind(this)}>Decrement Waitlisted By One</button>
+
+                <input
+                    type="number"
+                    onChange={event => this.setState({ addToWaitlist: event.target.value })}
+                    value={this.state.addToWaitlist}
+                />
+                <button className='btn' onClick={this.incrementWaitlisted.bind(this)}>Add Amount to Waitlisted</button>
+
+            
+            
+            </div>
+        )
     }
+
+
+}
 
 
 

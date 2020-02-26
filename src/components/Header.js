@@ -1,7 +1,8 @@
 import React from 'react';
+import '../styles/index.css';
 
 const Header = ({ title }) => (
-    <div>
+    <div className='header'>
         <a href="/">Home</a>
         <a href="/about">About</a>
         <a href="/topics">Topics</a>

@@ -1,14 +1,13 @@
 import React from 'react';
+import '../styles/index.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const Home = () => (
+const Topic = ({ match }) => (
     <div>
         <Header />
-        <h1 className='center'>Home</h1>
+        <h3>{match.params.topicId}</h3>
         <Footer />
     </div>
-
 )
-
-export default Home;
+export default Topic;
